@@ -5,14 +5,14 @@ Gem::Specification.new do |spec|
   spec.version     = PropInitializer::VERSION
   spec.authors     = [ "Paul Bob" ]
   spec.email       = [ "paul.ionut.bob@gmail.com" ]
-  spec.homepage = "https://avohq.io"
-  spec.summary     = "Summary of PropInitializer."
-  spec.description = "Description of PropInitializer."
+  spec.homepage    = "https://github.com/avo-hq/prop_initializer"
+  spec.summary     = "A flexible property initializer for Ruby classes inspired by the Literal gem."
+  spec.description = "PropInitializer provides an easy way to define properties for Ruby classes with options for defaults and customization. It simplifies the Literal gem's functionality by removing strict type requirements and adapting the initializer process for flexibility."
   spec.license     = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
   # to allow pushing to a single host or delete this section to allow pushing to any host.
-  spec.metadata["allowed_push_host"] = "Set to 'http://mygemserver.com'"
+  spec.metadata["allowed_push_host"] = "https://rubygems.pkg.github.com/avo-hq"
 
   spec.metadata["homepage_uri"] = spec.homepage
 
