@@ -44,7 +44,7 @@ module PropInitializer::Properties
   def prop_initializer_properties
     return @prop_initializer_properties if defined?(@prop_initializer_properties)
 
-    if superclass.is_a?(PropInitializer)
+    if superclass.is_a?(PropInitializer::Properties)
       @prop_initializer_properties = superclass.prop_initializer_properties.dup
     else
       @prop_initializer_properties = PropInitializer::Properties::Schema.new
