@@ -2,15 +2,17 @@
 
 ## Overview
 
-The `PropInitializer` gem is a flexible tool for defining properties on Ruby classes. This gem is an adaptation of the [Literal Gem](https://github.com/joeldrapper/literal), with custom modifications tailored to the needs of [Avo](https://avohq.io). We sincerely thank [Joel Drapper](https://github.com/joeldrapper) for the inspiration and base code that made this possible.
+The `prop_initializer` gem is a flexible tool for defining properties on Ruby classes.
 
-With `PropInitializer`, you can easily declare properties for any class, giving you flexible options for default values and more. However, unlike [Literal](https://github.com/joeldrapper/literal), `PropInitializer` simplifies by removing strict typing requirements, providing a more lightweight and adaptable interface.
+It's a fork of the [Literal Gem](https://github.com/joeldrapper/literal), with a few tweaks. We sincerely thank [Joel Drapper](https://github.com/joeldrapper) for the inspiration and base code that made this possible.
+
+With `prop_initializer`, you can easily declare properties for any class, giving you flexible options for default values and more. However, the scope is narrowed down by removing strict typing requirements, providing a more lightweight and adaptable interface.
 
 ---
 
 ## Installation
 
-To use `PropInitializer` in your Ruby project, add the following to your Gemfile:
+To use `prop_initializer ` in your Ruby project, add the following to your Gemfile:
 
 ```ruby
 gem "prop_initializer"
@@ -24,7 +26,7 @@ bundle install
 
 ## Usage
 
-To start using `PropInitializer`, you need to include the module in the class where you want to define properties.
+To start using `prop_initializer `, you need to include the module in the class where you want to define properties.
 
 ### Step 1: Extend the Properties Module
 
@@ -106,9 +108,9 @@ component.size # => :lg
 
 ## Key Differences from [Literal](https://github.com/joeldrapper/literal)
 
-While `PropInitializer` is based on the [Literal Gem](https://github.com/joeldrapper/literal), there are some important differences:
+While `prop_initializer` is based on the [Literal Gem](https://github.com/joeldrapper/literal), there are some important differences:
 
-- **No Type Requirement:** [Literal](https://github.com/joeldrapper/literal)'s properties system enforces types, but `PropInitializer` omits this for flexibility. You can define properties without needing to specify a type.
+- **No Type Requirement:** [Literal](https://github.com/joeldrapper/literal)'s properties system enforces types, while `prop_initializer` omits them for flexibility. You can define properties without needing to specify a type.
   
 - **Simplified Initializer:** The initialization process has been modified to avoid requiring types at the time of property definition.
 
@@ -122,7 +124,7 @@ If you're looking for a more type-strict approach to property initialization, we
 
 --- 
 
-Thank you for using `PropInitializer`! We hope this tool helps make your property management more efficient and adaptable in your Ruby projects.
+Thank you for using `prop_initializer`! We hope this tool helps make your property management more efficient and adaptable in your Ruby projects.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
