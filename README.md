@@ -1,4 +1,4 @@
-# PropInitializer Gem Documentation
+# `prop_initializer`
 
 ## Overview
 
