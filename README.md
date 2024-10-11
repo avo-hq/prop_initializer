@@ -1,4 +1,4 @@
-# `prop_initializer`
+# Prop Initializer
 
 ## Overview
 
