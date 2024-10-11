@@ -8,8 +8,6 @@ It's a fork of the [Literal Gem](https://github.com/joeldrapper/literal), with a
 
 With `prop_initializer`, you can easily declare properties for any class, giving you flexible options for default values and more. However, the scope is narrowed down by removing strict typing requirements, providing a more lightweight and adaptable interface.
 
----
-
 ## Installation
 
 To use `prop_initializer ` in your Ruby project, add the following to your Gemfile:
@@ -104,8 +102,6 @@ component.name # => "Button"
 component.size # => :lg
 ```
 
----
-
 ## Key Differences from [Literal](https://github.com/joeldrapper/literal)
 
 While `prop_initializer` is based on the [Literal Gem](https://github.com/joeldrapper/literal), there are some important differences:
@@ -114,17 +110,24 @@ While `prop_initializer` is based on the [Literal Gem](https://github.com/joeldr
   
 - **Simplified Initializer:** The initialization process has been modified to avoid requiring types at the time of property definition.
 
----
-
 ## Acknowledgements
 
 Special thanks to the team at [Literal](https://github.com/joeldrapper/literal) for their pioneering work on property-based object initialization. This gem builds upon the foundation laid by their work.
 
 If you're looking for a more type-strict approach to property initialization, we encourage you to check out the original [Literal Gem](https://github.com/joeldrapper/literal).
 
---- 
-
 Thank you for using `prop_initializer`! We hope this tool helps make your property management more efficient and adaptable in your Ruby projects.
+
+## Open Source
+
+ - [`active_storage-blurhash`](https://github.com/avo-hq/active_storage-blurhash) - A plug-n-play [blurhash](https://blurha.sh/) integration for images stored in ActiveStorage
+ - [`avo`](https://github.com/avo-hq/avo) - Build Content management systems with Ruby on Rails
+ - [`class_variants`](https://github.com/avo-hq/class_variants) - Easily configure styles and apply them as classes. Very useful when you're implementing Tailwind CSS components and call them with different states.
+ - [`stimulus-confetti`](https://github.com/avo-hq/stimulus-confetti) - The easiest way to add confetti to your StimulusJS app
+
+## Try Avo ⭐️
+
+If you enjoyed this gem try out [Avo](https://github.com/avo-hq/avo). It helps developers build Internal Tools, Admin Panels, CMSes, CRMs, and any other type of Business Apps 10x faster on top of Ruby on Rails.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
