@@ -1,3 +1,5 @@
+<a href="https://badge.fury.io/rb/prop_initializer"><img src="https://badge.fury.io/rb/prop_initializer.svg" alt="Gem Version" height="18"></a>
+
 # Prop Initializer
 
 ## Overview
