@@ -125,8 +125,7 @@ class PropInitializer::Property
 	end
 
 	def generate_initializer_handle_property(buffer = +"")
-		buffer << "  # " << @name.name << "\n" <<
-			"  property = properties[:" << @name.name << "]\n"
+		buffer << "  # " << @name.name << "\n"
 
 		if @kind == :keyword && ruby_keyword?
 			generate_initializer_escape_keyword(buffer)
@@ -156,7 +155,7 @@ class PropInitializer::Property
 	def generate_initializer_coerce_property(buffer = +"")
 		buffer <<
 			escaped_name <<
-			"= property.coerce(" <<
+			"= properties[:" << @name.name << "].coerce(" <<
 			escaped_name <<
 			", context: self)\n"
 	end
@@ -169,7 +168,7 @@ class PropInitializer::Property
 			escaped_name <<
 			"\n    " <<
 			escaped_name <<
-			" = property.default_value\n  end\n"
+			" = properties[:" << @name.name << "].default_value\n  end\n"
 	end
 
 	def generate_initializer_assign_value(buffer = +"")

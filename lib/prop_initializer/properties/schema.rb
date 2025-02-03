@@ -50,6 +50,12 @@ class PropInitializer::Properties::Schema
 			"end\n"
 	end
 
+	def generate_properties(buffer = +"")
+		buffer << "def properties\n"
+		buffer << "  self.class.prop_initializer_properties.properties_index\n"
+		buffer << "end\n"
+	end
+
 	def generate_to_h(buffer = +"")
 		buffer << "def to_h\n" << "  {\n"
 
@@ -103,7 +109,6 @@ class PropInitializer::Properties::Schema
 	end
 
 	def generate_initializer_body(buffer = +"")
-		buffer << "  properties = self.class.prop_initializer_properties.properties_index\n"
 		generate_initializer_handle_properties(@sorted_properties, buffer)
 	end
 
