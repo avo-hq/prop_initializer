@@ -6,6 +6,8 @@
 
 The `prop_initializer` gem is a flexible tool for defining properties on Ruby classes.
 
+![](./logo.png)
+
 It's a fork of the [Literal Gem](https://github.com/joeldrapper/literal), with a few tweaks. We sincerely thank [Joel Drapper](https://github.com/joeldrapper) for the inspiration and base code that made this possible.
 
 With `prop_initializer`, you can easily declare properties for any class, giving you flexible options for default values and more. However, the scope is narrowed down by removing strict typing requirements, providing a more lightweight and adaptable interface.
@@ -109,7 +111,7 @@ component.size # => :lg
 While `prop_initializer` is based on the [Literal Gem](https://github.com/joeldrapper/literal), there are some important differences:
 
 - **No Type Requirement:** [Literal](https://github.com/joeldrapper/literal)'s properties system enforces types, while `prop_initializer` omits them for flexibility. You can define properties without needing to specify a type.
-  
+
 - **Simplified Initializer:** The initialization process has been modified to avoid requiring types at the time of property definition.
 
 ## Acknowledgements
