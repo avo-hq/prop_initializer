@@ -74,6 +74,7 @@ module PropInitializer::Properties
   def __generate_prop_initializer_methods__(new_property, buffer = +"")
     buffer << "# frozen_string_literal: true\n"
     prop_initializer_properties.generate_initializer(buffer)
+    prop_initializer_properties.generate_properties(buffer)
     prop_initializer_properties.generate_to_h(buffer)
     new_property.generate_writer_method(buffer) if new_property.writer
     new_property.generate_reader_method(buffer) if new_property.reader
