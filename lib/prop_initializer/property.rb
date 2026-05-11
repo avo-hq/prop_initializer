@@ -3,6 +3,7 @@
 class PropInitializer::Property
 	ORDER = { :positional => 0, :* => 1, :keyword => 2, :** => 3, :& => 4 }.freeze
 	RUBY_KEYWORDS = %i[alias and begin break case class def do else elsif end ensure false for if in module next nil not or redo rescue retry return self super then true undef unless until when while yield].to_h { |k| [k, "__#{k}__"] }.freeze
+	GENERATOR_PROPERTY_LOCAL = "__pi_prop"
 
 	VISIBILITY_OPTIONS = Set[false, :private, :protected, :public].freeze
 	KIND_OPTIONS = Set[:positional, :*, :keyword, :**, :&].freeze
@@ -126,7 +127,7 @@ class PropInitializer::Property
 
 	def generate_initializer_handle_property(buffer = +"")
 		buffer << "  # " << @name.name << "\n" <<
-			"  property = properties[:" << @name.name << "]\n"
+			"  #{GENERATOR_PROPERTY_LOCAL} = properties[:" << @name.name << "]\n"
 
 		if @kind == :keyword && ruby_keyword?
 			generate_initializer_escape_keyword(buffer)
@@ -156,7 +157,7 @@ class PropInitializer::Property
 	def generate_initializer_coerce_property(buffer = +"")
 		buffer <<
 			escaped_name <<
-			"= property.coerce(" <<
+			"= #{GENERATOR_PROPERTY_LOCAL}.coerce(" <<
 			escaped_name <<
 			", context: self)\n"
 	end
@@ -169,7 +170,7 @@ class PropInitializer::Property
 			escaped_name <<
 			"\n    " <<
 			escaped_name <<
-			" = property.default_value\n  end\n"
+			" = #{GENERATOR_PROPERTY_LOCAL}.default_value\n  end\n"
 	end
 
 	def generate_initializer_assign_value(buffer = +"")
