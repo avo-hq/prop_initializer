@@ -86,7 +86,12 @@ GEM
 
 PLATFORMS
   arm64-darwin
+  arm64-darwin-23
+  arm64-darwin-24
+  arm64-darwin-25
+  ruby
   x86_64-linux
+  x86_64-linux-gnu
 
 DEPENDENCIES
   prop_initializer!
