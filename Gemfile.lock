@@ -82,7 +82,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.6.0)
-    zeitwerk (2.7.0)
+    zeitwerk (2.8.3)
 
 PLATFORMS
   arm64-darwin
