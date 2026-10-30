@@ -9,6 +9,7 @@ Gem::Specification.new do |spec|
   spec.summary     = "A flexible property initializer for Ruby classes inspired by the Literal gem."
   spec.description = "PropInitializer provides an easy way to define properties for Ruby classes with options for defaults and customization. It simplifies the Literal gem's functionality by removing strict type requirements and adapting the initializer process for flexibility."
   spec.license     = "MIT"
+  spec.required_ruby_version = ">= 3.2.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
 
