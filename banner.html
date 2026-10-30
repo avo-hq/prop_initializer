@@ -2,112 +2,102 @@
   Source of banner.png. Render with:
   chromium --headless=new --disable-gpu --hide-scrollbars --window-size=1600,900 --force-device-scale-factor=2 \
     --screenshot=banner.png file://$PWD/banner.html
-  Needs JetBrains Mono installed; ligatures are turned off in the CSS so -> and ||= print as written.
+  Needs JetBrains Mono and Adwaita Sans installed; ligatures are off in the CSS so -> prints as written.
 -->
 <!doctype html>
 <html><head><meta charset="utf-8">
 <style>
-  :root { --bg:#0e1016; --panel:#13161e; --line:#2a2f3c; --text:#e6e8ef; --muted:#9aa1b2; --dim:#6b7284;
-          --blue:#7aa2f7; --yellow:#e0af68; --red:#f7768e; --orange:#ff9e64; --cyan:#7dcfff; --green:#9ece6a; --purple:#bb9af7; }
+  :root { --bg:#101216; --panel:#171a20; --panel2:#1b1f27; --line:#2b303b; --text:#eceef3; --muted:#a0a7b8; --dim:#6c7383;
+          --amber:#f2b544; --teal:#4fd1c5; --rose:#f28b9b; --violet:#b69cff; --lime:#b8e06b; --sky:#7cc4ff; }
   * { box-sizing:border-box; margin:0; padding:0; }
   html,body { width:1600px; height:900px; overflow:hidden; background:var(--bg); color:var(--text);
-    font-family:"JetBrainsMono Nerd Font","JetBrains Mono",ui-monospace,monospace; -webkit-font-smoothing:antialiased;
-    font-variant-ligatures:none; font-feature-settings:"liga" 0,"calt" 0; }
-  .grid { position:absolute; inset:0;
-    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
-    background-size:40px 40px; }
-  .left { position:absolute; left:84px; top:118px; width:480px; }
-  .eyebrow { color:var(--blue); font-size:15px; letter-spacing:.22em; text-transform:uppercase; display:flex; align-items:center; gap:12px; }
-  .eyebrow svg { width:16px; height:16px; }
-  h1 { font-size:68px; line-height:1.04; font-weight:700; letter-spacing:-.02em; margin-top:24px; color:#dde3ff; }
-  h1 small { display:block; font-size:23px; font-weight:400; color:var(--muted); letter-spacing:0; margin-top:10px; }
-  .tagline { margin-top:30px; font-size:19px; line-height:1.55; color:var(--muted); }
-  .tagline b { color:var(--text); font-weight:500; }
-  ul { list-style:none; margin-top:32px; display:grid; gap:15px; font-size:16px; line-height:1.45; color:var(--text); }
-  li { display:flex; gap:14px; align-items:flex-start; }
-  li svg { width:18px; height:18px; flex:none; margin-top:3px; color:var(--blue); }
-  li span b { color:var(--text); font-weight:600; }
-  .url { position:absolute; left:84px; bottom:56px; font-size:14px; color:var(--dim); }
-  .card { position:absolute; left:600px; top:46px; width:480px; height:808px; background:var(--panel); border:1px solid #3d5a9e; border-radius:4px; }
-  .card .bar { height:44px; border-bottom:1px solid var(--line); display:flex; align-items:center; padding:0 16px; gap:8px; font-size:13px; color:var(--dim); }
-  .card .bar i { width:10px; height:10px; border-radius:50%; background:#2e3342; display:inline-block; }
-  .card .bar span { margin-left:8px; }
-  pre { font-size:16.5px; line-height:34px; padding:18px 20px; white-space:pre; color:var(--text); }
-  .k { color:var(--purple); } .s { color:var(--green); } .m { color:var(--blue); } .c { color:var(--dim); } .y { color:var(--yellow); } .o { color:var(--orange); } .p { color:var(--cyan); }
-  .co { position:absolute; left:1134px; width:410px; background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:15px 20px 17px; }
-  .co::before { content:""; position:absolute; left:-1px; top:14px; bottom:14px; width:3px; background:var(--accent); border-radius:2px; }
-  .co h3 { font-size:18px; font-weight:600; color:var(--accent); margin-bottom:6px; }
-  .co p { font-size:14.5px; line-height:1.5; color:var(--muted); }
-  .co p code { color:var(--text); }
-  svg.wires { position:absolute; inset:0; width:1600px; height:900px; pointer-events:none; }
+    font-family:"Adwaita Sans","Inter","Noto Sans",sans-serif; -webkit-font-smoothing:antialiased; }
+  body::before { content:""; position:absolute; inset:0;
+    background:radial-gradient(900px 500px at 20% -10%, rgba(242,181,68,.10), transparent 60%),
+               radial-gradient(700px 400px at 95% 110%, rgba(79,209,197,.08), transparent 60%); }
+  .mono { font-family:"JetBrainsMono Nerd Font","JetBrains Mono",ui-monospace,monospace; font-variant-ligatures:none; font-feature-settings:"liga" 0,"calt" 0; }
+  .top { position:absolute; left:80px; top:54px; width:900px; }
+  .eyebrow { color:var(--amber); font-size:14px; letter-spacing:.2em; text-transform:uppercase; font-weight:600; }
+  h1 { font-size:62px; line-height:1; letter-spacing:-.025em; font-weight:700; margin-top:12px; }
+  h2 { font-size:24px; font-weight:400; color:var(--muted); margin-top:10px; letter-spacing:-.01em; }
+  .tagline { margin-top:18px; font-size:18.5px; color:var(--muted); max-width:880px; line-height:1.45; }
+  .tagline b { color:var(--text); font-weight:600; }
+  .origin { position:absolute; right:80px; top:118px; width:430px; border-left:3px solid var(--amber); padding-left:18px; font-size:15px; line-height:1.5; color:var(--muted); }
+  .origin b { color:var(--text); font-weight:600; }
+  .panel { position:absolute; top:300px; height:432px; background:var(--panel); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .panel.l { left:80px; width:640px; }
+  .panel.r { left:800px; width:720px; background:var(--panel2); }
+  .panel .hd { height:40px; display:flex; align-items:center; gap:10px; padding:0 18px; border-bottom:1px solid var(--line); font-size:13px; letter-spacing:.14em; text-transform:uppercase; font-weight:600; color:var(--dim); }
+  .panel .hd em { font-style:normal; color:var(--amber); }
+  .panel .hd .file { margin-left:auto; letter-spacing:0; text-transform:none; font-weight:400; }
+  pre { font-size:15.5px; line-height:28px; padding:12px 22px; white-space:pre; color:var(--text); }
+  .k { color:var(--violet); } .s { color:var(--lime); } .m { color:var(--sky); } .c { color:var(--dim); } .y { color:var(--amber); } .p { color:var(--teal); } .o { color:var(--rose); }
+  .arrow { position:absolute; left:720px; top:300px; width:80px; height:432px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:var(--amber); }
+  .arrow svg { width:36px; height:36px; }
+  .arrow span { font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:600; color:var(--muted); text-align:center; line-height:1.5; }
+  .chips { position:absolute; left:80px; right:80px; top:752px; display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+  .chip { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:12px 14px 13px; }
+  .chip h3 { font-size:14.5px; font-weight:600; display:flex; align-items:center; gap:8px; }
+  .chip h3 i { width:8px; height:8px; border-radius:50%; background:var(--dot); display:inline-block; }
+  .chip p { font-size:13px; line-height:1.4; color:var(--muted); margin-top:5px; }
+  .chip p code { color:var(--text); font-size:12.5px; }
+  .foot { position:absolute; left:80px; right:80px; bottom:22px; display:flex; justify-content:space-between; font-size:13px; color:var(--dim); }
 </style></head>
 <body>
-<div class="grid"></div>
-
-<div class="left">
-  <div class="eyebrow">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>
-    Ruby gem &middot; by Avo
-  </div>
-  <h1>prop<br>initializer<small>properties for any Ruby class</small></h1>
-  <p class="tagline">Declare props, get an initializer. <b>Defaults, coercion, readers and writers</b> from one line per property. No types to declare.</p>
-  <ul>
-    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span><b>Built on Literal.</b> Joel Drapper&rsquo;s properties system, with the type checks taken out.</span></li>
-    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span><b>Fast.</b> The initializer is generated once, at class load. Props with no default cost one assignment.</span></li>
-    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg><span><b>Powers Avo.</b> Every component in the Avo admin framework declares its props this way.</span></li>
-  </ul>
+<div class="top">
+  <div class="eyebrow">Ruby gem &middot; by Avo</div>
+  <h1>prop_initializer</h1>
+  <h2>Properties for any Ruby class</h2>
+  <p class="tagline">One <b>prop</b> line per property. The initializer, readers, writers and <b>to_h</b> are generated when the class loads, so nothing runs at call time but the assignments. <b>No types to declare.</b></p>
 </div>
-<div class="url">github.com/avo-hq/prop_initializer &middot; MIT license</div>
+<div class="origin"><b>Built on Literal.</b> A fork of Joel Drapper&rsquo;s properties system with the type checks taken out. Every component in the Avo admin framework declares its props this way.</div>
 
-<div class="card">
-  <div class="bar"><i></i><i></i><i></i><span>button_component.rb</span></div>
-<pre><span class="k">class</span> <span class="y">ButtonComponent</span>
+<div class="panel l">
+  <div class="hd"><em>You write</em><span class="file mono">button_component.rb</span></div>
+<pre class="mono"><span class="k">class</span> <span class="y">ButtonComponent</span>
   <span class="m">extend</span> <span class="y">PropInitializer::Properties</span>
 
+  <span class="m">prop</span> <span class="p">:record</span>, <span class="o">kind:</span> <span class="p">:positional</span>
   <span class="m">prop</span> <span class="p">:label</span>, <span class="o">reader:</span> <span class="p">:public</span>
   <span class="m">prop</span> <span class="p">:size</span>, <span class="o">default:</span> <span class="p">:md</span>
   <span class="m">prop</span> <span class="p">:items</span>, <span class="o">default:</span> <span class="k">-></span> { [] }
   <span class="m">prop</span> <span class="p">:icon</span> <span class="k">do</span> |value|
     value&amp;.to_sym
   <span class="k">end</span>
-  <span class="m">prop</span> <span class="p">:record</span>, <span class="o">kind:</span> <span class="p">:positional</span>
-  <span class="m">prop</span> <span class="p">:options</span>, <span class="o">kind:</span> <span class="p">:**</span>
-
-  <span class="k">def</span> <span class="m">after_initialize</span>
-    @label ||= <span class="s">"Save"</span>
-  <span class="k">end</span>
 <span class="k">end</span>
 
-<span class="y">ButtonComponent</span>.new(post, <span class="o">icon:</span> <span class="s">"check"</span>)
-<span class="c">#&lt;ButtonComponent @record=#&lt;Post id: 1&gt;</span>
-<span class="c">  @label="Save" @size=:md @items=[]</span>
-<span class="c">  @icon=:check @options={}&gt;</span></pre>
+<span class="y">ButtonComponent</span>.new(post, <span class="o">icon:</span> <span class="s">"check"</span>)</pre>
 </div>
 
-<div class="co" style="top:62px;--accent:var(--blue)"><h3>One extend, one method</h3><p><code>prop</code> declares a property. The initializer, readers and writers are generated right there, at class load.</p></div>
-<div class="co" style="top:186px;--accent:var(--yellow)"><h3>Readers, writers, predicates</h3><p>Off by default. Ask for <code>reader:</code>, <code>writer:</code> or <code>predicate:</code> with the visibility you want.</p></div>
-<div class="co" style="top:310px;--accent:var(--red)"><h3>Defaults</h3><p>A frozen value, or a proc called once per instance. Pass <code>nil</code> explicitly and it stays <code>nil</code>.</p></div>
-<div class="co" style="top:434px;--accent:var(--orange)"><h3>Coercion blocks</h3><p>Run on the new instance, after the default, with every earlier prop already assigned.</p></div>
-<div class="co" style="top:558px;--accent:var(--cyan)"><h3>Every kind of argument</h3><p>Keyword by default. Also <code>:positional</code>, <code>:*</code>, <code>:**</code> and <code>:&amp;</code>, in Ruby&rsquo;s own order.</p></div>
-<div class="co" style="top:682px;--accent:var(--green)"><h3>after_initialize</h3><p>Define it and it runs once every prop is assigned. Values land in ivars; <code>to_h</code> returns them all.</p></div>
+<div class="arrow">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg>
+  <span>generated<br>at class load</span>
+</div>
 
-<!-- code line i center: y = 108 + 34*i + 17; callout centers ~ top + 60 -->
-<svg class="wires" viewBox="0 0 1600 900">
-  <g fill="none" stroke-width="2.5" stroke-linejoin="round">
-    <path d="M1081 159 H1096 L1118 122 H1134" stroke="var(--blue)"/>
-    <path d="M1081 227 H1096 L1118 246 H1134" stroke="var(--yellow)"/>
-    <path d="M1081 278 H1096 L1118 370 H1134" stroke="var(--red)"/>
-    <path d="M1081 363 H1096 L1118 494 H1134" stroke="var(--orange)"/>
-    <path d="M1081 448 H1096 L1118 618 H1134" stroke="var(--cyan)"/>
-    <path d="M1081 533 H1096 L1118 742 H1134" stroke="var(--green)"/>
-  </g>
-  <g stroke="var(--bg)" stroke-width="2.5">
-    <circle cx="1081" cy="159" r="5" fill="var(--blue)"/>
-    <circle cx="1081" cy="227" r="5" fill="var(--yellow)"/>
-    <circle cx="1081" cy="278" r="5" fill="var(--red)"/>
-    <circle cx="1081" cy="363" r="5" fill="var(--orange)"/>
-    <circle cx="1081" cy="448" r="5" fill="var(--cyan)"/>
-    <circle cx="1081" cy="533" r="5" fill="var(--green)"/>
-  </g>
-</svg>
+<div class="panel r">
+  <div class="hd"><em>You get</em><span class="file">simplified</span></div>
+<pre class="mono"><span class="k">def</span> <span class="m">initialize</span>(record = <span class="p">nil</span>, label: <span class="p">nil</span>, size: <span class="p">:md</span>,
+               items: <span class="y">Null</span>, icon: <span class="p">nil</span>)
+  @record = record
+  @label  = label
+  @size   = size
+  @items  = <span class="y">Null</span> == items ? [] : items   <span class="c"># proc, per instance</span>
+  @icon   = instance_exec(icon, &amp;coercion)
+  after_initialize <span class="k">if</span> respond_to?(<span class="p">:after_initialize</span>)
+<span class="k">end</span>
+
+<span class="m">attr_reader</span> <span class="p">:label</span>
+<span class="k">def</span> <span class="m">to_h</span> = { <span class="o">record:</span> @record, <span class="o">label:</span> @label, <span class="o">size:</span> @size,
+             <span class="o">items:</span> @items, <span class="o">icon:</span> @icon }</pre>
+</div>
+
+<div class="chips">
+  <div class="chip" style="--dot:var(--teal)"><h3><i></i>Every argument kind</h3><p>Keyword by default. Also <code>:positional</code>, <code>:*</code>, <code>:**</code> and <code>:&amp;</code>, in Ruby&rsquo;s order.</p></div>
+  <div class="chip" style="--dot:var(--amber)"><h3><i></i>Defaults</h3><p>A frozen value or a proc called once per instance. An explicit <code>nil</code> stays <code>nil</code>.</p></div>
+  <div class="chip" style="--dot:var(--rose)"><h3><i></i>Coercion blocks</h3><p>Run on the new instance, after the default, with earlier props already assigned.</p></div>
+  <div class="chip" style="--dot:var(--violet)"><h3><i></i>Readers, writers, predicates</h3><p>None unless asked. <code>reader:</code>, <code>writer:</code> and <code>predicate:</code> take a visibility.</p></div>
+  <div class="chip" style="--dot:var(--lime)"><h3><i></i>after_initialize</h3><p>Define it and it runs once every prop is assigned. <code>to_h</code> returns them all.</p></div>
+</div>
+
+<div class="foot"><span>github.com/avo-hq/prop_initializer</span><span>MIT license</span></div>
 </body></html>
