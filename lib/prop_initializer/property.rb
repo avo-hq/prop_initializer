@@ -127,7 +127,7 @@ class PropInitializer::Property
 
   def generate_initializer_handle_property(buffer = +"")
     buffer << "  # " << @name.name << "\n" <<
-      "  #{GENERATOR_PROPERTY_LOCAL} = properties[:" << @name.name << "]\n"
+      "  #{GENERATOR_PROPERTY_LOCAL} = __pi_properties[:" << @name.name << "]\n"
 
     if @kind == :keyword && ruby_keyword?
       generate_initializer_escape_keyword(buffer)
