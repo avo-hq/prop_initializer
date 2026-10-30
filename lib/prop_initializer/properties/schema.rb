@@ -47,7 +47,7 @@ class PropInitializer::Properties::Schema
       "def initialize(#{generate_initializer_params})\n"
     generate_initializer_body(buffer)
     buffer << "" \
-      "  after_initialize if respond_to?(:after_initialize)\n" \
+      "  after_initialize() if respond_to?(:after_initialize)\n" \
       "end\n"
   end
 

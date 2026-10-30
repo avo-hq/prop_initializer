@@ -139,10 +139,23 @@ class PropertiesTest < Minitest::Test
   end
 
   def test_prop_names_that_match_the_generated_locals
-    klass = define { prop :property; prop :properties; prop :value, reader: :public, writer: :public }
-    object = klass.new(property: "one", properties: "many", value: "v")
+    klass = define do
+      prop :property
+      prop :properties
+      prop :binding
+      prop :if
+      prop :after_initialize
+      prop :value, reader: :public, writer: :public
+      attr_reader :hook_ran
 
-    assert_equal({ property: "one", properties: "many", value: "v" }, object.to_h)
+      def after_initialize
+        @hook_ran = true
+      end
+    end
+    object = klass.new(property: "one", properties: "many", binding: "b", if: 2, after_initialize: 3, value: "v")
+
+    assert_equal({ property: "one", properties: "many", binding: "b", if: 2, after_initialize: 3, value: "v" }, object.to_h)
+    assert object.hook_ran
     object.value = "w"
     assert_equal "w", object.value
   end

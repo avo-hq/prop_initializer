@@ -149,7 +149,7 @@ class PropInitializer::Property
   def generate_initializer_escape_keyword(buffer = +"")
     buffer <<
       escaped_name <<
-      " = binding.local_variable_get(:" <<
+      " = ::Kernel.binding.local_variable_get(:" <<
       @name.name <<
       ")\n"
   end
