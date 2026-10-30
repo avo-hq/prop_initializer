@@ -43,15 +43,17 @@ class PropInitializer::Properties::Schema
   end
 
   def generate_initializer(buffer = +"")
-    buffer << "def initialize(#{generate_initializer_params})\n"
+    buffer << "alias initialize initialize\n" \
+      "def initialize(#{generate_initializer_params})\n"
     generate_initializer_body(buffer)
     buffer << "" \
-      "  after_initialize if respond_to?(:after_initialize)\n" \
+      "  after_initialize() if respond_to?(:after_initialize)\n" \
       "end\n"
   end
 
   def generate_to_h(buffer = +"")
-    buffer << "def to_h\n" << "  {\n"
+    buffer << "alias to_h to_h\n" \
+      "def to_h\n" << "  {\n"
 
     sorted_properties = @sorted_properties
     i, n = 0, sorted_properties.size
@@ -103,7 +105,7 @@ class PropInitializer::Properties::Schema
   end
 
   def generate_initializer_body(buffer = +"")
-    buffer << "  properties = self.class.prop_initializer_properties.properties_index\n"
+    buffer << "  __pi_properties = self.class.prop_initializer_properties.properties_index\n"
     generate_initializer_handle_properties(@sorted_properties, buffer)
   end
 

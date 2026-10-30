@@ -13,7 +13,7 @@ module PropInitializer::Properties
     end
 
     unless PropInitializer::Property::VISIBILITY_OPTIONS.include?(predicate)
-        raise ArgumentError.new(p "The predicate must be one of #{PropInitializer::Property::VISIBILITY_OPTIONS.map(&:inspect).join(', ')}.")
+        raise ArgumentError.new("The predicate must be one of #{PropInitializer::Property::VISIBILITY_OPTIONS.map(&:inspect).join(', ')}.")
     end
 
     if reader && :class == name
@@ -67,7 +67,15 @@ module PropInitializer::Properties
     if defined?(@__prop__initializer_extension__)
       @__prop__initializer_extension__
     else
-      @__prop__initializer_extension__ = Module.new
+      @__prop__initializer_extension__ = Module.new do
+        def initialize
+          after_initialize if respond_to?(:after_initialize)
+        end
+
+        def to_h
+          {}
+        end
+      end
     end
   end
 

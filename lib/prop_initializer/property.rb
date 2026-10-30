@@ -127,7 +127,7 @@ class PropInitializer::Property
 
   def generate_initializer_handle_property(buffer = +"")
     buffer << "  # " << @name.name << "\n" <<
-      "  #{GENERATOR_PROPERTY_LOCAL} = properties[:" << @name.name << "]\n"
+      "  #{GENERATOR_PROPERTY_LOCAL} = __pi_properties[:" << @name.name << "]\n"
 
     if @kind == :keyword && ruby_keyword?
       generate_initializer_escape_keyword(buffer)
@@ -149,7 +149,7 @@ class PropInitializer::Property
   def generate_initializer_escape_keyword(buffer = +"")
     buffer <<
       escaped_name <<
-      " = binding.local_variable_get(:" <<
+      " = ::Kernel.binding.local_variable_get(:" <<
       @name.name <<
       ")\n"
   end
