@@ -101,7 +101,15 @@ class PropInitializer::Property
   end
 
   def generate_writer_method(buffer = +"")
-    buffer << @writer.name << " attr_writer :" << @name.name << "\n"
+    return buffer << @writer.name << " attr_writer :" << @name.name << "\n" unless @coercion
+
+    # Through self.class at call time, not captured: a subclass may redeclare the prop with another block,
+    # or with none, and still inherit this writer.
+    buffer <<
+      @writer.name << " def " << @name.name << "=(value)\n" \
+      "  coercion = self.class.prop_initializer_properties[:" << @name.name << "].coercion\n" \
+      "  @" << @name.name << " = coercion ? instance_exec(value, &coercion) : value\n" \
+      "end\n"
   end
 
   def generate_predicate_method(buffer = +"")
@@ -165,7 +173,7 @@ class PropInitializer::Property
       escaped_name <<
       "\n    " <<
       escaped_name <<
-      " = #{GENERATOR_PROPERTY_LOCAL}.default" << (Proc === @default ? ".call" : "") << "\n  end\n"
+      " = " << (Proc === @default ? "instance_exec(&#{GENERATOR_PROPERTY_LOCAL}.default)" : "#{GENERATOR_PROPERTY_LOCAL}.default") << "\n  end\n"
   end
 
   def generate_initializer_assign_value(buffer = +"")

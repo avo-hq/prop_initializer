@@ -60,6 +60,16 @@ class PropertiesTest < Minitest::Test
     assert_equal({ size: nil, offset: 0, tags: nil, raw: nil, callback: :to_s }, klass.new(size: nil, offset: 0, tags: nil, raw: nil).to_h)
   end
 
+  def test_proc_default_runs_on_the_instance_and_sees_earlier_props
+    klass = define do
+      prop :count, default: 2
+      prop :items, default: -> { Array.new(@count, :x) }
+    end
+
+    assert_equal [ :x, :x ], klass.new.to_h[:items]
+    assert_equal [ :x, :x, :x ], klass.new(count: 3).to_h[:items]
+  end
+
   def test_proc_default_is_called_once_per_instance
     klass = define { prop :items, default: -> { [] } }
 
@@ -122,6 +132,43 @@ class PropertiesTest < Minitest::Test
     end
 
     assert_equal [ 1, 2 ], klass.new(first: 1).seen
+  end
+
+  def test_a_private_after_initialize_runs_too
+    klass = define do
+      prop :first
+      attr_reader :seen
+
+      private
+
+      def after_initialize
+        @seen = @first
+      end
+    end
+
+    assert_equal 1, klass.new(first: 1).seen
+  end
+
+  def test_writer_runs_the_coercion_block_of_the_class_being_written_to
+    parent = define { prop(:icon, reader: :public, writer: :public) { |value| value&.to_sym } }
+    child = Class.new(parent) { prop :icon, default: :home }
+    object = parent.new(icon: "home")
+    object.icon = "check"
+    plain = child.new
+    plain.icon = "check"
+
+    assert_equal :check, object.icon
+    assert_equal "check", plain.icon
+  end
+
+  def test_prop_returns_the_name_so_macros_can_chain
+    assert_equal :title, define { }.prop(:title)
+  end
+
+  def test_the_extension_module_has_a_readable_name
+    skip "Module#set_temporary_name needs Ruby 3.3" unless Module.method_defined?(:set_temporary_name)
+
+    assert_equal "PropInitializer::Properties(Extension)", define { prop :a }.ancestors[1].name
   end
 
   def test_subclass_inherits_props_adds_its_own_and_can_override_a_default_without_touching_the_parent

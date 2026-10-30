@@ -53,6 +53,13 @@ prop :args, kind: :*      # A property for handling splat arguments
 prop :kwargs, kind: :**   # A property for handling keyword arguments
 ```
 
+A default must be a frozen value or a proc. A proc runs on each new instance once the positional and splat properties, and the keyword properties declared before it, are assigned, so it can read them:
+
+```ruby
+prop :count, default: 2
+prop :items, default: -> { Array.new(@count) }
+```
+
 #### Custom Property with Block:
 
 You can define a custom processing block when declaring a property, for example:
@@ -85,6 +92,14 @@ This will automatically generate a public getter method, allowing you to retriev
 ```ruby
 my_class_instance.title  # Public getter for the 'title' property
 ```
+
+#### Writer and Predicate:
+
+`writer: :public` adds a setter and `predicate: :public` a `title?` method. A setter runs the property's block, if it has one, the same way the initializer does.
+
+#### after_initialize:
+
+Define `after_initialize`, public or private, and it runs once every property is assigned.
 
 ### Example:
 
