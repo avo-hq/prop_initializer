@@ -47,10 +47,17 @@ class PropertiesTest < Minitest::Test
   end
 
   def test_literal_defaults_survive_the_trip_through_the_generated_signature
-    klass = define { prop :size, default: :"with space"; prop :offset, default: -1; prop :tags, default: [].freeze }
+    binary = "\xFF".b.to_sym
+    klass = define do
+      prop :size, default: :"with space"
+      prop :offset, default: -1
+      prop :tags, default: [].freeze
+      prop :raw, default: binary
+      prop :callback, kind: :&, default: :to_s
+    end
 
-    assert_equal({ size: :"with space", offset: -1, tags: [] }, klass.new.to_h)
-    assert_equal({ size: nil, offset: 0, tags: nil }, klass.new(size: nil, offset: 0, tags: nil).to_h)
+    assert_equal({ size: :"with space", offset: -1, tags: [], raw: binary, callback: :to_s }, klass.new.to_h)
+    assert_equal({ size: nil, offset: 0, tags: nil, raw: nil, callback: :to_s }, klass.new(size: nil, offset: 0, tags: nil, raw: nil).to_h)
   end
 
   def test_proc_default_is_called_once_per_instance

@@ -54,11 +54,13 @@ class PropInitializer::Property
     nil != @default
   end
 
-  # A Symbol, Integer, true or false goes straight into the signature as a Ruby literal, so the initializer
-  # never looks the property up. Strings stay out: a literal takes the generated code's encoding, not the
-  # default's.
+  # Symbol, Integer, true and false go into the signature as literals, so the initializer never looks the
+  # property up. Not for a block parameter, and not for a Symbol the generated UTF-8 source cannot spell.
   def inline_default?
-    Symbol === @default || Integer === @default || true == @default || false == @default
+    return false unless positional? || keyword?
+
+    Integer === @default || true == @default || false == @default ||
+      (Symbol === @default && (Encoding::UTF_8 == @default.encoding || Encoding::US_ASCII == @default.encoding))
   end
 
   def lookup?
