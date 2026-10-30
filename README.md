@@ -53,7 +53,7 @@ prop :args, kind: :*      # A property for handling splat arguments
 prop :kwargs, kind: :**   # A property for handling keyword arguments
 ```
 
-A default must be a frozen value or a proc. A proc runs on each new instance, after the properties declared before it are assigned, so it can read them:
+A default must be a frozen value or a proc. A proc runs on each new instance once the positional and splat properties, and the keyword properties declared before it, are assigned, so it can read them:
 
 ```ruby
 prop :count, default: 2

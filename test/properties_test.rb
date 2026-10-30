@@ -149,12 +149,16 @@ class PropertiesTest < Minitest::Test
     assert_equal 1, klass.new(first: 1).seen
   end
 
-  def test_writer_runs_the_coercion_block
-    klass = define { prop(:icon, reader: :public, writer: :public) { |value| value&.to_sym } }
-    object = klass.new(icon: "home")
+  def test_writer_runs_the_coercion_block_of_the_class_being_written_to
+    parent = define { prop(:icon, reader: :public, writer: :public) { |value| value&.to_sym } }
+    child = Class.new(parent) { prop :icon, default: :home }
+    object = parent.new(icon: "home")
     object.icon = "check"
+    plain = child.new
+    plain.icon = "check"
 
     assert_equal :check, object.icon
+    assert_equal "check", plain.icon
   end
 
   def test_prop_returns_the_name_so_macros_can_chain

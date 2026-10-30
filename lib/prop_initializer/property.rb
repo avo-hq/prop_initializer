@@ -103,9 +103,12 @@ class PropInitializer::Property
   def generate_writer_method(buffer = +"")
     return buffer << @writer.name << " attr_writer :" << @name.name << "\n" unless @coercion
 
+    # Through self.class at call time, not captured: a subclass may redeclare the prop with another block,
+    # or with none, and still inherit this writer.
     buffer <<
       @writer.name << " def " << @name.name << "=(value)\n" \
-      "  @" << @name.name << " = instance_exec(value, &self.class.prop_initializer_properties[:" << @name.name << "].coercion)\n" \
+      "  coercion = self.class.prop_initializer_properties[:" << @name.name << "].coercion\n" \
+      "  @" << @name.name << " = coercion ? instance_exec(value, &coercion) : value\n" \
       "end\n"
   end
 
