@@ -54,6 +54,17 @@ class PropInitializer::Property
     nil != @default
   end
 
+  # A Symbol, Integer, true or false goes straight into the signature as a Ruby literal, so the initializer
+  # never looks the property up. Strings stay out: a literal takes the generated code's encoding, not the
+  # default's.
+  def inline_default?
+    Symbol === @default || Integer === @default || true == @default || false == @default
+  end
+
+  def lookup?
+    (default? && !inline_default?) || !!@coercion
+  end
+
   def param
     case @kind
     when :*
@@ -75,10 +86,6 @@ class PropInitializer::Property
     ORDER[@kind] <=> ORDER[other.kind]
   end
 
-  def coerce(value, context:)
-    context.instance_exec(value, &@coercion)
-  end
-
   def ruby_keyword?
     !!RUBY_KEYWORDS[@name]
   end
@@ -87,30 +94,12 @@ class PropInitializer::Property
     RUBY_KEYWORDS[@name] || @name.name
   end
 
-  def default_value
-    case @default
-    when Proc then @default.call
-    else @default
-    end
-  end
-
   def generate_reader_method(buffer = +"")
-    buffer <<
-      (@reader ? @reader.name : "public") <<
-      "\ndef " <<
-      @name.name <<
-      "\n  value = @" <<
-      @name.name <<
-      "\n  value\nend\n"
+    buffer << @reader.name << " attr_reader :" << @name.name << "\n"
   end
 
   def generate_writer_method(buffer = +"")
-    buffer <<
-      (@writer ? @writer.name : "public") <<
-      " def " <<
-      @name.name <<
-      "=(value)\n" <<
-      "  @#{@name.name} = value\nend\n"
+    buffer << @writer.name << " attr_writer :" << @name.name << "\n"
   end
 
   def generate_predicate_method(buffer = +"")
@@ -126,14 +115,17 @@ class PropInitializer::Property
   end
 
   def generate_initializer_handle_property(buffer = +"")
-    buffer << "  # " << @name.name << "\n" <<
-      "  #{GENERATOR_PROPERTY_LOCAL} = __pi_properties[:" << @name.name << "]\n"
+    buffer << "  # " << @name.name << "\n"
+
+    if lookup?
+      buffer << "  #{GENERATOR_PROPERTY_LOCAL} = __pi_properties[:" << @name.name << "]\n"
+    end
 
     if @kind == :keyword && ruby_keyword?
       generate_initializer_escape_keyword(buffer)
     end
 
-    if default?
+    if default? && !inline_default?
       generate_initializer_assign_default(buffer)
     end
 
@@ -156,10 +148,11 @@ class PropInitializer::Property
 
   def generate_initializer_coerce_property(buffer = +"")
     buffer <<
+      "  " <<
       escaped_name <<
-      "= #{GENERATOR_PROPERTY_LOCAL}.coerce(" <<
+      " = instance_exec(" <<
       escaped_name <<
-      ", context: self)\n"
+      ", &#{GENERATOR_PROPERTY_LOCAL}.coercion)\n"
   end
 
   def generate_initializer_assign_default(buffer = +"")
@@ -170,7 +163,7 @@ class PropInitializer::Property
       escaped_name <<
       "\n    " <<
       escaped_name <<
-      " = #{GENERATOR_PROPERTY_LOCAL}.default_value\n  end\n"
+      " = #{GENERATOR_PROPERTY_LOCAL}.default" << (Proc === @default ? ".call" : "") << "\n  end\n"
   end
 
   def generate_initializer_assign_value(buffer = +"")

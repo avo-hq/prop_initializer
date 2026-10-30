@@ -46,6 +46,13 @@ class PropertiesTest < Minitest::Test
     assert_equal({ size: :lg, hidden: true }, klass.new(size: :lg, hidden: true).to_h)
   end
 
+  def test_literal_defaults_survive_the_trip_through_the_generated_signature
+    klass = define { prop :size, default: :"with space"; prop :offset, default: -1; prop :tags, default: [].freeze }
+
+    assert_equal({ size: :"with space", offset: -1, tags: [] }, klass.new.to_h)
+    assert_equal({ size: nil, offset: 0, tags: nil }, klass.new(size: nil, offset: 0, tags: nil).to_h)
+  end
+
   def test_proc_default_is_called_once_per_instance
     klass = define { prop :items, default: -> { [] } }
 

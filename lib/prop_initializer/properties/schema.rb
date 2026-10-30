@@ -82,17 +82,9 @@ class PropInitializer::Properties::Schema
       when :&
         buffer << "&" << property.escaped_name
       when :positional
-        if property.default?
-          buffer << property.escaped_name << " = PropInitializer::Null"
-        else
-          buffer << property.escaped_name << " = nil"
-        end
+        buffer << property.escaped_name << " = " << generate_initializer_default(property)
       when :keyword
-        if property.default?
-          buffer << property.name.name << ": PropInitializer::Null"
-        else
-          buffer << property.name.name << ": nil"
-        end
+        buffer << property.name.name << ": " << generate_initializer_default(property)
       else
         raise "You should never see this error."
       end
@@ -104,8 +96,21 @@ class PropInitializer::Properties::Schema
     buffer
   end
 
+  def generate_initializer_default(property)
+    if property.inline_default?
+      property.default.inspect
+    elsif property.default?
+      "PropInitializer::Null"
+    else
+      "nil"
+    end
+  end
+
   def generate_initializer_body(buffer = +"")
-    buffer << "  __pi_properties = self.class.prop_initializer_properties.properties_index\n"
+    if @sorted_properties.any?(&:lookup?)
+      buffer << "  __pi_properties = self.class.prop_initializer_properties.properties_index\n"
+    end
+
     generate_initializer_handle_properties(@sorted_properties, buffer)
   end
 
