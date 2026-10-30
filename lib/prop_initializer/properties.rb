@@ -39,6 +39,8 @@ module PropInitializer::Properties
     prop_initializer_properties << property
     __define_prop_initializer_methods__(property)
     include(__prop__initializer_extension__)
+
+    name
   end
 
   def prop_initializer_properties
@@ -68,8 +70,10 @@ module PropInitializer::Properties
       @__prop__initializer_extension__
     else
       @__prop__initializer_extension__ = Module.new do
+        set_temporary_name "PropInitializer::Properties(Extension)" if respond_to?(:set_temporary_name)
+
         def initialize
-          after_initialize if respond_to?(:after_initialize)
+          after_initialize if respond_to?(:after_initialize, true)
         end
 
         def to_h

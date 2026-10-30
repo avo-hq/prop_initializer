@@ -101,7 +101,12 @@ class PropInitializer::Property
   end
 
   def generate_writer_method(buffer = +"")
-    buffer << @writer.name << " attr_writer :" << @name.name << "\n"
+    return buffer << @writer.name << " attr_writer :" << @name.name << "\n" unless @coercion
+
+    buffer <<
+      @writer.name << " def " << @name.name << "=(value)\n" \
+      "  @" << @name.name << " = instance_exec(value, &self.class.prop_initializer_properties[:" << @name.name << "].coercion)\n" \
+      "end\n"
   end
 
   def generate_predicate_method(buffer = +"")
@@ -165,7 +170,7 @@ class PropInitializer::Property
       escaped_name <<
       "\n    " <<
       escaped_name <<
-      " = #{GENERATOR_PROPERTY_LOCAL}.default" << (Proc === @default ? ".call" : "") << "\n  end\n"
+      " = " << (Proc === @default ? "instance_exec(&#{GENERATOR_PROPERTY_LOCAL}.default)" : "#{GENERATOR_PROPERTY_LOCAL}.default") << "\n  end\n"
   end
 
   def generate_initializer_assign_value(buffer = +"")
