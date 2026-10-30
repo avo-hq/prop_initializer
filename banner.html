@@ -2,7 +2,8 @@
   Source of banner.png. Render with:
   chromium --headless=new --disable-gpu --hide-scrollbars --window-size=1600,900 --force-device-scale-factor=2 \
     --screenshot=banner.png file://$PWD/banner.html
-  Needs JetBrains Mono and Adwaita Sans installed; ligatures are off in the CSS so -> prints as written.
+  Needs JetBrainsMono Nerd Font (or JetBrains Mono) and Adwaita Sans installed; ligatures are off in the CSS
+  so -> prints as written.
 -->
 <!doctype html>
 <html><head><meta charset="utf-8">
@@ -24,33 +25,33 @@
   .tagline b { color:var(--text); font-weight:600; }
   .origin { position:absolute; right:80px; top:118px; width:430px; border-left:3px solid var(--amber); padding-left:18px; font-size:15px; line-height:1.5; color:var(--muted); }
   .origin b { color:var(--text); font-weight:600; }
-  .panel { position:absolute; top:300px; height:432px; background:var(--panel); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .panel { position:absolute; top:290px; height:444px; background:var(--panel); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
   .panel.l { left:80px; width:640px; }
   .panel.r { left:800px; width:720px; background:var(--panel2); }
   .panel .hd { height:40px; display:flex; align-items:center; gap:10px; padding:0 18px; border-bottom:1px solid var(--line); font-size:13px; letter-spacing:.14em; text-transform:uppercase; font-weight:600; color:var(--dim); }
   .panel .hd em { font-style:normal; color:var(--amber); }
   .panel .hd .file { margin-left:auto; letter-spacing:0; text-transform:none; font-weight:400; }
-  pre { font-size:15.5px; line-height:28px; padding:12px 22px; white-space:pre; color:var(--text); }
+  pre { font-size:16.5px; line-height:29px; padding:12px 22px; white-space:pre; color:var(--text); }
   .k { color:var(--violet); } .s { color:var(--lime); } .m { color:var(--sky); } .c { color:var(--dim); } .y { color:var(--amber); } .p { color:var(--teal); } .o { color:var(--rose); }
-  .arrow { position:absolute; left:720px; top:300px; width:80px; height:432px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:var(--amber); }
-  .arrow svg { width:36px; height:36px; }
+  .arrow { position:absolute; left:720px; top:290px; width:80px; height:444px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; color:var(--amber); }
+  .arrow svg { width:40px; height:40px; }
   .arrow span { font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:600; color:var(--muted); text-align:center; line-height:1.5; }
-  .chips { position:absolute; left:80px; right:80px; top:752px; display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
-  .chip { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:12px 14px 13px; }
-  .chip h3 { font-size:14.5px; font-weight:600; display:flex; align-items:center; gap:8px; }
+  .chips { position:absolute; left:80px; right:80px; top:752px; gap:12px; display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+  .chip { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:11px 14px 12px; }
+  .chip h3 { font-size:16px; font-weight:600; display:flex; align-items:center; gap:8px; }
   .chip h3 i { width:8px; height:8px; border-radius:50%; background:var(--dot); display:inline-block; }
-  .chip p { font-size:13px; line-height:1.4; color:var(--muted); margin-top:5px; }
-  .chip p code { color:var(--text); font-size:12.5px; }
-  .foot { position:absolute; left:80px; right:80px; bottom:22px; display:flex; justify-content:space-between; font-size:13px; color:var(--dim); }
+  .chip p { font-size:14px; line-height:1.4; color:var(--muted); margin-top:5px; }
+  .chip p code { color:var(--text); font-size:13.5px; }
+  .foot { position:absolute; left:80px; right:80px; bottom:16px; display:flex; justify-content:space-between; font-size:14px; color:var(--dim); }
 </style></head>
 <body>
 <div class="top">
   <div class="eyebrow">Ruby gem &middot; by Avo</div>
   <h1>prop_initializer</h1>
   <h2>Properties for any Ruby class</h2>
-  <p class="tagline">One <b>prop</b> line per property. The initializer, readers, writers and <b>to_h</b> are generated when the class loads, so nothing runs at call time but the assignments. <b>No types to declare.</b></p>
+  <p class="tagline">One <b>prop</b> line per property. The initializer, readers, writers and <b>to_h</b> are generated once, when the class loads. <b>No types to declare.</b></p>
 </div>
-<div class="origin"><b>Built on Literal.</b> A fork of Joel Drapper&rsquo;s properties system with the type checks taken out. Every component in the Avo admin framework declares its props this way.</div>
+<div class="origin"><b>Built on Literal.</b> A fork of Joel Drapper&rsquo;s properties system with the type checks taken out. The Avo admin framework&rsquo;s components are built on it.</div>
 
 <div class="panel l">
   <div class="hd"><em>You write</em><span class="file mono">button_component.rb</span></div>
@@ -71,7 +72,6 @@
 
 <div class="arrow">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg>
-  <span>generated<br>at class load</span>
 </div>
 
 <div class="panel r">

@@ -2,7 +2,7 @@
 
 # Prop Initializer
 
-![prop_initializer: properties for any Ruby class. One prop line per property; the initializer, readers, writers and to_h are generated when the class loads. Built on Literal, used by every Avo component. Two panels: on the left, a ButtonComponent declaring props with a positional kind, a public reader, a default, a proc default and a coercion block; on the right, the initialize, attr_reader and to_h it generates. Below, five notes: every argument kind, defaults, coercion blocks, readers, writers and predicates, after_initialize.](./banner.png)
+![prop_initializer: properties for any Ruby class. One prop line per property; the initializer, readers, writers and to_h are generated once, when the class loads. Built on Literal, used by Avo's components. Left: a ButtonComponent declaring props with a positional kind, a public reader, a default, a proc default and a coercion block. Right: the initialize, attr_reader and to_h it generates. Below, five notes: every argument kind; defaults; coercion blocks; readers, writers and predicates; after_initialize.](./banner.png)
 
 ## Overview
 
@@ -28,7 +28,7 @@ bundle install
 
 ## Usage
 
-To start using `prop_initializer`, you need to include the module in the class where you want to define properties.
+To start using `prop_initializer`, you need to extend the class with the module where you want to define properties.
 
 ### Step 1: Extend the Properties Module
 
