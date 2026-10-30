@@ -2,11 +2,11 @@
 
 # Prop Initializer
 
+![prop_initializer: properties for any Ruby class. Declare props, get an initializer with defaults, coercion, readers and writers, and no types to declare. Built on Literal, powers Avo. Beside it, a ButtonComponent declaring props, with callouts for the extend line, readers and writers, defaults, coercion blocks, argument kinds and after_initialize.](./banner.png)
+
 ## Overview
 
 The `prop_initializer` gem is a flexible tool for defining properties on Ruby classes.
-
-![](./logo.png)
 
 It's a fork of the [Literal Gem](https://github.com/joeldrapper/literal), with a few tweaks. We sincerely thank [Joel Drapper](https://github.com/joeldrapper) for the inspiration and base code that made this possible.
 
@@ -14,7 +14,7 @@ With `prop_initializer`, you can easily declare properties for any class, giving
 
 ## Installation
 
-To use `prop_initializer ` in your Ruby project, add the following to your Gemfile:
+To use `prop_initializer` in your Ruby project, add the following to your Gemfile:
 
 ```ruby
 gem "prop_initializer"
@@ -28,7 +28,7 @@ bundle install
 
 ## Usage
 
-To start using `prop_initializer `, you need to include the module in the class where you want to define properties.
+To start using `prop_initializer`, you need to include the module in the class where you want to define properties.
 
 ### Step 1: Extend the Properties Module
 
@@ -42,7 +42,7 @@ end
 
 ### Step 2: Define Properties
 
-Properties can be declared using the `prop` method, which generates writers and makes them available as instance variables (e.g., `@name`, `@size`, etc.).
+Properties can be declared using the `prop` method. The generated initializer assigns each one to an instance variable (e.g., `@name`, `@size`, etc.).
 
 #### Basic Syntax:
 
@@ -65,7 +65,7 @@ end
 
 ### Step 3: Accessing Properties
 
-By default, `PropInitializer` generates a writer for each declared property. The properties are stored as instance variables, which can be accessed within the class:
+By default, `PropInitializer` generates no reader or writer. The properties are stored as instance variables, which can be accessed within the class:
 
 ```ruby
 @name    # Accesses the value of the 'name' property
