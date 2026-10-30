@@ -13,7 +13,7 @@ module PropInitializer::Properties
     end
 
     unless PropInitializer::Property::VISIBILITY_OPTIONS.include?(predicate)
-        raise ArgumentError.new(p"The predicate must be one of #{PropInitializer::Property::VISIBILITY_OPTIONS.map(&:inspect).join(', ')}.")
+        raise ArgumentError.new(p "The predicate must be one of #{PropInitializer::Property::VISIBILITY_OPTIONS.map(&:inspect).join(', ')}.")
     end
 
     if reader && :class == name
