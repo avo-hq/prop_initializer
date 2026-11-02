@@ -165,10 +165,14 @@ class PropertiesTest < Minitest::Test
     assert_equal :title, define { }.prop(:title)
   end
 
-  def test_the_extension_module_has_a_readable_name
-    skip "Module#set_temporary_name needs Ruby 3.3" unless Module.method_defined?(:set_temporary_name)
+  # view_component 4.20 looks up every included module by name while eager loading, so a name that is not a
+  # constant path aborts the host's boot: https://github.com/ViewComponent/view_component/issues/2764
+  def test_every_named_ancestor_of_a_prop_class_resolves_as_a_constant
+    klass = define { prop :name }
 
-    assert_equal "PropInitializer::Properties(Extension)", define { prop :a }.ancestors[1].name
+    klass.ancestors.select(&:name).each do |ancestor|
+      assert_same ancestor, Object.const_get(ancestor.name)
+    end
   end
 
   def test_subclass_inherits_props_adds_its_own_and_can_override_a_default_without_touching_the_parent

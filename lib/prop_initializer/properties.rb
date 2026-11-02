@@ -70,8 +70,6 @@ module PropInitializer::Properties
       @__prop__initializer_extension__
     else
       @__prop__initializer_extension__ = Module.new do
-        set_temporary_name "PropInitializer::Properties(Extension)" if respond_to?(:set_temporary_name)
-
         def initialize
           after_initialize if respond_to?(:after_initialize, true)
         end
