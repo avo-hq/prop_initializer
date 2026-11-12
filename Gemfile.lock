@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    prop_initializer (0.5.1)
+    prop_initializer (1.0.0)
       zeitwerk (>= 2.6.18)
 
 GEM
